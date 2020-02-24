@@ -12,14 +12,10 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class CreateOrderDto {
-
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-
     private String nameDevice;
     private String typeDevice;
     private String malfunction;
     private String note;
+    private Integer clientId;
 }
 

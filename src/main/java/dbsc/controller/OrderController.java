@@ -15,9 +15,9 @@ public class OrderController {
 
     private final OrdersService ordersService;
 
-    @PostMapping("/create")//добавить, изменить, удалить
-    public void create(@RequestBody CreateOrderDto ordersDto) {
-        ordersService.createOrder(ordersDto);
+    @PostMapping("/c")//добавить, изменить, удалить
+    public void create(@RequestBody CreateOrderDto createOrderDto) {
+        ordersService.create(createOrderDto);
     }
 
     @GetMapping

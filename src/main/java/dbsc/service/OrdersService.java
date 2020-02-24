@@ -28,25 +28,43 @@ public class OrdersService {
 
 
 
-    public OrderEntity createOrder(CreateOrderDto createOrdersDto){
-        ClientEntity clientEntity = clientRepository.findByFirstNameAndLastNameAndPhoneNumber(
-                createOrdersDto.getFirstName(),
-                createOrdersDto.getLastName(),
-                createOrdersDto.getPhoneNumber());
+//    public OrderEntity createOrder(CreateOrderDto createOrdersDto){
+//        ClientEntity clientEntity = clientRepository.findByFirstNameAndLastNameAndPhoneNumber(
+//                createOrdersDto.getFirstName(),
+//                createOrdersDto.getLastName(),
+//                createOrdersDto.getPhoneNumber());
+//
+//         if(clientEntity == null) {
+//            clientEntity = clientService.create(ClientConverter.toClientDto(createOrdersDto));
+//        }
+//
+//         return ordersRepository.save(OrderEntity.builder()
+//                 .typeDevice(createOrdersDto.getTypeDevice())
+//                 .nameDevice(createOrdersDto.getNameDevice())
+//                 .status(OrderStatus.NEW.getTitle())
+//                 .malfunction(createOrdersDto.getMalfunction())
+//                 .date(new Date())
+//                 .note(createOrdersDto.getNote())
+//                 .clientEntity(clientEntity)
+//         .build());
+//    }
 
-         if(clientEntity == null) {
-            clientEntity = clientService.create(ClientConverter.toClientDto(createOrdersDto));
-        }
+    public OrderEntity create(CreateOrderDto orderDto){
+        Integer id = orderDto.getClientId();
 
-         return ordersRepository.save(OrderEntity.builder()
-                 .typeDevice(createOrdersDto.getTypeDevice())
-                 .nameDevice(createOrdersDto.getNameDevice())
-                 .status(OrderStatus.NEW.getTitle())
-                 .malfunction(createOrdersDto.getMalfunction())
-                 .date(new Date())
-                 .note(createOrdersDto.getNote())
-                 .clientEntity(clientEntity)
-         .build());
+        if(!clientRepository.existsById(id))
+            throw new HttpException(String.format(
+                    "Impossible create order, because client with id = %s doesn't exist!", id), HttpStatus.NOT_FOUND);
+
+        return ordersRepository.save(OrderEntity.builder()
+                .typeDevice(orderDto.getTypeDevice())
+                .nameDevice(orderDto.getNameDevice())
+                .status(OrderStatus.NEW.getTitle())
+                .malfunction(orderDto.getMalfunction())
+                .date(new Date())
+                .note(orderDto.getNote())
+                .clientEntity(clientRepository.getOne(id))
+                .build());
     }
 
     public List<OrderDto> getOrders(Integer orderId, Integer clientId, String orderStatus){

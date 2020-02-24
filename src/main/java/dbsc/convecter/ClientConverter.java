@@ -40,13 +40,13 @@ public class ClientConverter {
 
     }
 
-    public static ClientDto toClientDto(CreateOrderDto createOrderDto) {
-        return ClientDto.builder()
-                .firstName(createOrderDto.getFirstName())
-                .lastName(createOrderDto.getLastName())
-                .phoneNumber(createOrderDto.getPhoneNumber())
-                .build();
-    }
+//    public static ClientDto toClientDto(CreateOrderDto createOrderDto) {
+//        return ClientDto.builder()
+//                .firstName(createOrderDto.getFirstName())
+//                .lastName(createOrderDto.getLastName())
+//                .phoneNumber(createOrderDto.getPhoneNumber())
+//                .build();
+//    }
     public static ClientEntity update(ClientEntity clientEntity, ClientDto clientDto){
         clientEntity.setFirstName(clientDto.getFirstName());
         clientEntity.setLastName(clientDto.getLastName());

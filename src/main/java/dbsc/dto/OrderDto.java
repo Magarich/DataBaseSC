@@ -17,6 +17,7 @@ public class OrderDto {
     private String typeDevice;
     private Date date;
     private String status;
-    private String comment;
+    private String note;
     private Double price;
+    private String malfunction;
 }
