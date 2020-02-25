@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.bytebuddy.description.type.TypeList;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Builder
@@ -41,6 +43,9 @@ public class OrderEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="client_id",nullable = false)
     private ClientEntity clientEntity;
+
+    @OneToMany(mappedBy = "orderEntity",fetch = FetchType.EAGER)
+    private List<PriceOfWorkEntity> priceOfWorkEntityList;
 
 //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinTable(name = "order_client",
