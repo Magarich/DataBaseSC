@@ -44,7 +44,7 @@ public class OrderEntity {
     @JoinColumn(name ="client_id",nullable = false)
     private ClientEntity clientEntity;
 
-    @OneToMany(mappedBy = "orderEntity",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order",fetch = FetchType.EAGER)
     private List<PriceOfWorkEntity> priceOfWorkEntityList;
 
 //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

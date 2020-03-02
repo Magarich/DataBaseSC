@@ -32,10 +32,8 @@ public class ClientEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "order_id")
-//    private List<OrderEntity> orderEntityList;
-    @OneToMany(mappedBy = "clientEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<OrderEntity> orderEntities;
+
+//    @OneToMany(mappedBy = "clientEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    private List<OrderEntity> orderEntities;
 
 }

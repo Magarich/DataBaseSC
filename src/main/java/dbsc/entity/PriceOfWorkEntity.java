@@ -31,7 +31,6 @@ public class PriceOfWorkEntity {
     @Column(name = "price")
     private Double price;
 
-   //@Column(name = "order_id")
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private OrderEntity order;
 }

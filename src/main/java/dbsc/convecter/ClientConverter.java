@@ -19,7 +19,7 @@ public class ClientConverter {
                 .firstName(clientDto.getFirstName())
                 .lastName(clientDto.getLastName())
                 .phoneNumber(clientDto.getPhoneNumber())
-                .orderEntities(new ArrayList<>())
+                //.orderEntities(new ArrayList<>())
                 .build();
     }
 

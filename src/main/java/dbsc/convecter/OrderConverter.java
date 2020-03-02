@@ -18,7 +18,7 @@ public class OrderConverter {
                 .date(orderEntity.getDate())
                 .malfunction(orderEntity.getMalfunction())
                 .note(orderEntity.getNote())
-                .price(0d)
+                .price(0.0)
                 .build();
     }
 

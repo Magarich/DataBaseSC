@@ -82,7 +82,7 @@ public class OrdersService {
 
 
     public PriceOfWorkEntity addTypeWork(Integer id, PriceOfWorkDto priceOfWorkDto) {
-        Optional<OrderEntity> opt = ordersRepository.findById(69);
+        Optional<OrderEntity> opt = ordersRepository.findById(id);
         if (!opt.isPresent()) {
             throw new HttpException(String.format("Order with id = %s doesn't exist!", id), HttpStatus.NOT_FOUND);
         }
@@ -93,7 +93,11 @@ public class OrdersService {
     }
 
     public InfoOrderDto orderInfo(Integer id) {
-        OrderEntity orderEntity = ordersRepository.getById(id);
+        Optional<OrderEntity> opt = ordersRepository.findById(id);
+        if (!opt.isPresent()) {
+            throw new HttpException(String.format("Order with id = %s doesn't exist!", id), HttpStatus.NOT_FOUND);
+        }
+        OrderEntity orderEntity = opt.get();
         return InfoOrderDto.builder()
                 .id(orderEntity.getId())
                 .nameDevice(orderEntity.getNameDevice())
@@ -101,7 +105,7 @@ public class OrdersService {
                 .dateCreate(orderEntity.getDate())
                 .status(orderEntity.getStatus())
                 .note(orderEntity.getNote())
-                .totalCost(0d)
+                .totalCost(priceOfWorkRepository.sum(id))
                 .malfunction(orderEntity.getMalfunction())
                 .client(ClientConverter.toClientDto(orderEntity.getClientEntity()))
                 .priceOfWorkDtoList(PriceOfWorkConverter.toPriceOfWorkDto(orderEntity.getPriceOfWorkEntityList()))

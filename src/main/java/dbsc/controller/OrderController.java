@@ -21,11 +21,18 @@ public class OrderController {
         return ordersService.orderInfo(id);
     }
 
-
+//    {
+//        "nameDevice": "PlayStation",
+//            "typeDevice": "console",
+//            "malfunctio":"Сильно грееться",
+//            "note": "Не царапать",
+//            "clientId": 73
+//    }
     @PostMapping("/create")//добавить, изменить, удалить
     public void create(@RequestBody CreateOrderDto createOrderDto) {
         ordersService.create(createOrderDto);
     }
+
 
     @GetMapping("/get")
     public List<OrderDto> getOrders(@RequestParam(name = "orderId", required = false) Integer orderId,
@@ -44,9 +51,9 @@ public class OrderController {
     {
 	"kindOfWork":"Профилактика",
 	"price": 400
-}
+	}
     */
-    @PutMapping("/{id}/addTypeWork")
+    @PostMapping("/{id}/addTypeWork")
     public void addTypeWork(@PathVariable Integer id, @RequestBody PriceOfWorkDto priceOfWorkDto){
         ordersService.addTypeWork(id, priceOfWorkDto);
     }
